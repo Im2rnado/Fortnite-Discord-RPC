@@ -1,7 +1,7 @@
 # Fort-Discord-RPC
 Fort-Discord-RPC is a tool which sets your Fortnite level as your Discord status.
 
-<img align="middle" src="https://i.imgur.com/ClHl87i.png" width="350px" draggable="false">
+<img align="middle" src="https://i.imgur.com/ClHl87i.png" width="800px" draggable="false">
 
 ## Requirements
 - [NodeJS](https://nodejs.org/en/download/)
