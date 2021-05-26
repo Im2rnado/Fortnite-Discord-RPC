@@ -1,0 +1,30 @@
+{
+  "name": "fortnite-discord-rpc",
+  "version": "1.0.0",
+  "description": "A tool which sets your Fortnite level as your Discord status",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Im2rnado/Fortnite-Discord-RPC.git"
+  },
+  "keywords": [
+    "fortnite",
+    "im2rnado",
+    "fnbr",
+    "fortnitediscord",
+    "fortnitestats"
+  ],
+  "author": "Im2rnado",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Im2rnado/Fortnite-Discord-RPC/issues"
+  },
+  "homepage": "https://github.com/Im2rnado/Fortnite-Discord-RPC#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "discord-rpc": "^3.2.0"
+  }
+}
