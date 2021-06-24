@@ -1,20 +1,11 @@
 const rpc = require("discord-rpc");
 const axios = require("axios");
-const { username, text, apiKey, timeOut } = require("./config.json");
+const { username, text, timeOut } = require("./config.json");
 
-if (!username) return console.error("❌ You did not supply an account username!");
+if (!username) return console.error("You did not supply an account username!");
 
 (async () => {
-    const accId = await axios.get(`https://fortniteapi.io/v1/lookup?username=${encodeURI(username)}`, {
-        headers: {
-            "Authorization": apiKey,
-        },
-    }).catch(console.error);
-
-    if (accId.data.error) return console.error("❌ The username you supplied is invalid!");
-    console.log(`Successfully fetched acccount ${username} (${accId.data.account_id})`);
-
-    const level = await getLevel(accId.data.account_id);
+    const level = await getLevel(username);
 
     const client = new rpc.Client({ transport: "ipc" });
 
@@ -43,7 +34,7 @@ if (!username) return console.error("❌ You did not supply an account username!
     setInterval(myCallback, timeOut);
 
     async function myCallback() {
-        const newLevel = await getLevel(accId.data.account_id);
+        const newLevel = await getLevel(username);
 
         client.request("SET_ACTIVITY", {
             pid: process.pid,
@@ -67,13 +58,11 @@ if (!username) return console.error("❌ You did not supply an account username!
     client.login({ clientId: "847089646119026699" }).catch(console.error);
 })();
 
-async function getLevel(accId) {
-    const stats = await axios.get(`https://fortniteapi.io/v1/stats?account=${accId}`, {
-        headers: {
-            "Authorization": apiKey,
-        },
-    }).catch(console.error);
+async function getLevel(username) {
+    const stats = await axios.get(`https://fortnite-api.com/v1/stats/br/v2?name=${username}`);
+    
+    if (stats.data.error) return console.error("An error has occured: " + stats.data.error);
 
-    console.log(`Successfully fetched level for ${stats.data.name} - Level ${stats.data.account.level}`)
-    return stats.data.account.level;
+    console.log(`Successfully fetched level for ${stats.data.data.account.name} - Level ${stats.data.data.battlePass.level}`)
+    return stats.data.data.battlePass.level;
 }
