@@ -59,7 +59,11 @@ if (!username) return console.error("You did not supply an account username!");
 })();
 
 async function getLevel(username) {
-    const stats = await axios.get(`https://fortnite-api.com/v1/stats/br/v2?name=${username}`);
+    const stats = await axios.get(`https://fortnite-api.com/v1/stats/br/v2?name=${username}`,
+                                  headers: { 
+                                           authorization: "api-key"
+                                  }
+    });
     
     if (stats.data.error) return console.error("An error has occured: " + stats.data.error);
 
